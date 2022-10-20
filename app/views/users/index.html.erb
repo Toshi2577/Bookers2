@@ -1,9 +1,13 @@
 <div>
   <h1>User info</h1>
-  <%= image_tag @user.get_profile_image(100, 100) %>
-  <p>name <%= @user.name %></p>
-  <p><%= @user.introduction %>introduction</p>
+  <%= image_tag current_user.get_profile_image(100, 100) %>
+  <p>name <%= current_user.name %></p>
+  <p><%= current_user.introduction %>introduction</p>
+    <%= link_to "Edit", edit_user_path(current_user.id) %>
 </div>
+
+
+
 
 <h1>New book</h1>
   <%= form_with model: @book do |f| %>
@@ -17,7 +21,7 @@
 <h2>Users</h2>
 <%= @users.each do |user| %>
   <%= image_tag user.get_profile_image(100, 100) %>
-  <p>name <%= user.name %></p>
-  <%= link_to user_path(user) %>
+  <p><%= user.name %></p>
+  <%= link_to "Show", user_path(user) %>
 <% end %>
 

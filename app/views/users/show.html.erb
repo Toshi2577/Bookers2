@@ -1,21 +1,28 @@
 <div>
   <h1>User info</h1>
-  <%= image_tag @user.get_profile_image(100, 100) %>
-  <p>name <%= @user.name %></p>
-  <p><%= @user.introduction %>introduction</p>
+  <%= image_tag current_user.get_profile_image(100, 100) %>
+  <p>name <%= current_user.name %></p>
+  <p><%= current_user.introduction %>introduction</p>
+    <%= link_to "Edit", edit_user_path(current_user.id) %>
 </div>
 
 
+<h1>New book</h1>
+  <%= form_with model: @book do |f| %>
+    <h4>Title</h4>
+      <%= f.text_field :title %>
+    <h4>Opinion</h4>
+      <%= f.text_area :body %>
+    <%= f.submit 'CreateBook' %>
+  <% end %>
 
-<p><%= link_to"プロフィール編集", edit_user_path(@user.id) %></p>
-
-
-
-  <h1>New book</h1>
-    <%= form_with model: @book do |f| %>
-      <h4>Title</h4>
-        <%= f.text_field :title %>
-      <h4>Opinion</h4>
-        <%= f.text_area :body %>
-      <%= f.submit 'CreateBook' %>
+<h1>Books</h1>
+<% @books.each do |book| %>
+  <%= image_tag book.user.get_profile_image(100, 100) %>
+  <p>
+    <%= link_to book_path(book) do %>
+      <%= book.title %>
     <% end %>
+  </p>
+  <p><%= book.body %></p>
+<% end %>
