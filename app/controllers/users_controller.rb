@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   before_action :ensure_current_user, {only: [:edit, :update]}
   def ensure_current_user
     if current_user.id != params[:id].to_i
-      redirect_to user_path(current_user.id)
+      redirect_to user_path(current_user)
     end
   end
 
